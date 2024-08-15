@@ -1,0 +1,57 @@
+name: hello
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.0.10+1
+  slide_to_act: ^2.0.2
+  get: ^4.6.6
+  cupertino_icons: ^1.0.6
+  firebase_core: ^2.28.0
+  firebase_auth: ^4.19.0
+  cloud_firestore: ^4.16.0
+  image_picker: ^1.0.7
+  firebase_storage: ^11.7.0
+  uuid: ^4.3.2
+  intl: ^0.19.0
+  cached_network_image: ^3.3.1
+  fluttertoast: ^8.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+
+flutter:
+  uses-material-design: true
+
+
+  assets:
+    - assets/icons/
+    - assets/images/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-ExtraLight.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+          weight: 800
+  
