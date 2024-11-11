@@ -20,4 +20,5 @@ class AssetsImage {
 
   static const boyPic = "$imagesPath/boy.png";
   static const girlPic = "$imagesPath/girl.png";
+  static const notes = "$imagesPath/person.png";
 }

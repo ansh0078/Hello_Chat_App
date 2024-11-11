@@ -9,6 +9,7 @@ import 'package:hello/pages/contactPage/widgets/constactSearch.dart';
 import 'package:hello/pages/contactPage/widgets/newContactTile.dart';
 import 'package:hello/pages/group/widgets/newGroup.dart';
 import 'package:hello/pages/home/widgets/chatTitle.dart';
+import 'package:hello/pages/notes/newNotesPage.dart';
 
 class ContactPage extends StatelessWidget {
   const ContactPage({super.key});
@@ -42,9 +43,11 @@ class ContactPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             NewContactTile(
-              btnName: "New Contact",
+              btnName: "New Notes",
               icon: Icons.person_add,
-              ontap: () {},
+              ontap: () {
+                Get.to(const NewNotesPage(isNewNote: true,));
+              },
             ),
             const SizedBox(height: 20),
             NewContactTile(

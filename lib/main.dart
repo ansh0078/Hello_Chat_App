@@ -3,15 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hello/config/theme.dart';
+import 'package:hello/controller/newNoteController.dart';
+import 'package:hello/controller/noteProvider.dart';
 import 'package:hello/firebase_options.dart';
 import 'package:hello/pages/splacePage/splacePage.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => NotesProvider()),
+      ChangeNotifierProvider(create: (_) => NewNoteController()),
+    ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

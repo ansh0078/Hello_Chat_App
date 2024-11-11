@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 
 class PrimaryBtn extends StatelessWidget {
   final String btnName;
-  final IconData icon;
+  final IconData? icon;
   final VoidCallback ontap;
-  const PrimaryBtn({super.key, required this.btnName, required this.icon, required this.ontap});
+  final Color? color;
+  const PrimaryBtn({
+    super.key,
+    required this.btnName,
+    this.icon,
+    required this.ontap,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +20,15 @@ class PrimaryBtn extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: ontap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Theme.of(context).colorScheme.primary,
+          color: color ?? Theme.of(context).colorScheme.primary,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon),
+            icon != null ? Icon(icon) : const SizedBox(),
             const SizedBox(width: 10),
             Text(
               btnName,

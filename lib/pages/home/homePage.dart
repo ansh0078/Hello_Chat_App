@@ -10,6 +10,7 @@ import 'package:hello/pages/contactPage/contactPage.dart';
 import 'package:hello/pages/group/groupPage.dart';
 import 'package:hello/pages/home/widgets/chatList.dart';
 import 'package:hello/pages/home/widgets/tabBar.dart';
+import 'package:hello/pages/notes/notesPage.dart';
 import 'package:hello/pages/profilePage/profilePage.dart';
 
 class HomePage extends StatefulWidget {
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           children: const [
             ChatList(),
             GroupPage(),
-            Center(child: Text("Notes"),)
+            Notespage()
           ],
         ),
       ),
