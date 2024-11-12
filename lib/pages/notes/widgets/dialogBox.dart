@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DialogBox extends StatefulWidget {
+  final String? tag;
   const DialogBox({
-    super.key,
-  });
+    Key? key,
+    this.tag,
+  }) : super(key: key);
 
   @override
   State<DialogBox> createState() => _DialogBoxState();
@@ -16,7 +18,7 @@ class _DialogBoxState extends State<DialogBox> {
   @override
   void initState() {
     super.initState();
-    tagController = TextEditingController();
+    tagController = TextEditingController(text:  widget.tag);
     tagKey = GlobalKey();
   }
 

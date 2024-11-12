@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:hello/controller/newNoteController.dart';
 import 'package:hello/model/notes.dart';
 import 'package:hello/pages/notes/newNotesPage.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class NoteTitle extends StatelessWidget {
   final Note note;
-  // final String title;
-  // final String subTitle;
-  // final String lastTime;
   const NoteTitle({
     super.key,
-    // required this.title,
-    // required this.subTitle,
-    // required this.lastTime,
     required this.note,
   });
 
@@ -21,7 +16,17 @@ class NoteTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(NewNotesPage(isNewNote: false));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+              create: (_) => NewNoteController()..note = note,
+              child: const NewNotesPage(
+                isNewNote: false,
+              ),
+            ),
+          ),
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),

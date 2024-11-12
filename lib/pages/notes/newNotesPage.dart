@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
+import 'package:hello/config/string.dart';
 import 'package:hello/controller/newNoteController.dart';
+import 'package:hello/controller/noteProvider.dart';
 import 'package:hello/pages/notes/widgets/dialogBox.dart';
 import 'package:hello/widgets/primaryBtn.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class NewNotesPage extends StatefulWidget {
 
 class _NewNotesPageState extends State<NewNotesPage> {
   late final NewNoteController newNoteController;
+  late final TextEditingController titleController;
   late final QuillController quillController;
   late FocusNode focusNode;
 
@@ -27,6 +29,7 @@ class _NewNotesPageState extends State<NewNotesPage> {
   void initState() {
     super.initState();
     newNoteController = context.read<NewNoteController>();
+    titleController = TextEditingController(text: newNoteController.title);
     quillController = QuillController.basic()
       ..addListener(() {
         newNoteController.content = quillController.document;
@@ -38,12 +41,14 @@ class _NewNotesPageState extends State<NewNotesPage> {
         newNoteController.readOnly = false;
       } else {
         newNoteController.readOnly = true;
+        quillController.document = newNoteController.content;
       }
     });
   }
 
   @override
   void dispose() {
+    titleController.dispose();
     quillController.dispose();
     focusNode.dispose();
     super.dispose();
@@ -107,6 +112,13 @@ class _NewNotesPageState extends State<NewNotesPage> {
         appBar: AppBar(
           title: Text(widget.isNewNote ? "New Notes" : "Edit Note"),
           actions: [
+            // GestureDetector(
+            //   onTap: () {
+
+            //     // context.read<NotesProvider>().deleteNote(note);
+            //   },
+            //   child: FaIcon(FontAwesomeIcons.trash),
+            // ),
             Selector<NewNoteController, bool>(
               selector: (context, newNoteController) => newNoteController.readOnly,
               builder: (context, readOnly, child) => IconButton(
@@ -142,6 +154,7 @@ class _NewNotesPageState extends State<NewNotesPage> {
               Selector<NewNoteController, bool>(
                 selector: (context, controller) => controller.readOnly,
                 builder: (context, read, child) => TextField(
+                  controller: titleController,
                   style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -157,16 +170,16 @@ class _NewNotesPageState extends State<NewNotesPage> {
                 ),
               ),
               if (!widget.isNewNote) ...[
-                const Row(
+                Row(
                   children: [
-                    Expanded(flex: 3, child: Text("Last Modified :")),
-                    Expanded(flex: 5, child: Text("11 November 2024, 4:30 PM")),
+                    const Expanded(flex: 3, child: Text("Last Modified :")),
+                    Expanded(flex: 5, child: Text(toLongDate(newNoteController.note!.dateModified))),
                   ],
                 ),
-                const Row(
+                Row(
                   children: [
-                    Expanded(flex: 3, child: Text("Created :")),
-                    Expanded(flex: 5, child: Text("11 November 2024, 4:30 PM")),
+                    const Expanded(flex: 3, child: Text("Created :")),
+                    Expanded(flex: 5, child: Text(toLongDate(newNoteController.note!.dateCreated))),
                   ],
                 ),
               ],
@@ -183,7 +196,7 @@ class _NewNotesPageState extends State<NewNotesPage> {
                           onPressed: () async {
                             final String? tag = await showDialog<String?>(
                               context: context,
-                              builder: (context) => Center(
+                              builder: (context) => const Center(
                                 child: DialogBox(),
                               ),
                             );
@@ -209,7 +222,7 @@ class _NewNotesPageState extends State<NewNotesPage> {
                     child: Selector<NewNoteController, List<String>>(
                       selector: (_, NewNoteController) => newNoteController.tags,
                       builder: (_, tags, __) => tags.isEmpty
-                          ? Text("No tags added")
+                          ? const Text("No tags added")
                           : SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -219,6 +232,22 @@ class _NewNotesPageState extends State<NewNotesPage> {
                                     label: tags[index],
                                     onClosed: () {
                                       newNoteController.removeTag(index);
+                                    },
+                                    onTap: () async {
+                                      final String? tag = await showDialog<String?>(
+                                        context: context,
+                                        builder: (context) => Center(
+                                          child: DialogBox(
+                                            tag: tags[index],
+                                          ),
+                                        ),
+                                      );
+                                      // if (tag != null) {
+                                      //   newNoteController.addTag(tag);
+                                      // }
+                                      if (tag != null && tag != tags[index]) {
+                                        newNoteController.updateTag(tag, index);
+                                      }
                                     },
                                   ),
                                 ),
@@ -263,38 +292,43 @@ class _NewNotesPageState extends State<NewNotesPage> {
 class NoteTag extends StatelessWidget {
   final String label;
   final VoidCallback? onClosed;
+  final VoidCallback? onTap;
   const NoteTag({
     super.key,
     required this.label,
     this.onClosed,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 4),
-      padding: const EdgeInsets.only(right: 15, left: 15, bottom: 8, top: 5),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          if (onClosed != null) ...[
-            SizedBox(width: 4),
-            GestureDetector(
-              onTap: onClosed,
-              child: Icon(
-                Icons.close,
-                size: 18,
-              ),
-            )
-          ]
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(right: 4),
+        padding: const EdgeInsets.only(right: 15, left: 15, bottom: 8, top: 5),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            if (onClosed != null) ...[
+              const SizedBox(width: 4),
+              GestureDetector(
+                onTap: onClosed,
+                child: const Icon(
+                  Icons.close,
+                  size: 18,
+                ),
+              )
+            ]
+          ],
+        ),
       ),
     );
   }

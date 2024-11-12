@@ -39,9 +39,6 @@ class Notespage extends StatelessWidget {
                   itemCount: notes.length,
                   itemBuilder: (context, index) {
                     return NoteTitle(
-                      // title: ,
-                      // subTitle: "subTitle",
-                      // lastTime: "948",
                       note: notes[index],
                     );
                   });
