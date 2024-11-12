@@ -3,7 +3,6 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hello/config/string.dart';
 import 'package:hello/controller/newNoteController.dart';
-import 'package:hello/controller/noteProvider.dart';
 import 'package:hello/pages/notes/widgets/dialogBox.dart';
 import 'package:hello/widgets/primaryBtn.dart';
 import 'package:provider/provider.dart';

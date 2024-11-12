@@ -32,8 +32,8 @@ class GroupPage extends StatelessWidget {
               child: ChatTile(
                 name: groups[index].name!,
                 imageUrl: groups[index].profileUrl == "" ? AssetsImage.defaultProfileUrl : groups[index].profileUrl!,
-                lastChat: "Group Created",
-                lastTime: "Just Now",
+                lastChat: groups[index].lastMessage.toString() == "" ? "last message" : "last message",
+                lastTime: groups[index].timeStamp.toString().substring(0, 16),
               ),
             );
           },
