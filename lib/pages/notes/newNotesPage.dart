@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:hello/config/string.dart';
 import 'package:hello/controller/newNoteController.dart';
+import 'package:hello/pages/aiChatPage.dart';
 import 'package:hello/pages/notes/widgets/dialogBox.dart';
 import 'package:hello/widgets/primaryBtn.dart';
 import 'package:provider/provider.dart';
@@ -108,6 +110,16 @@ class _NewNotesPageState extends State<NewNotesPage> {
         Navigator.pop(context);
       },
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Get.to(const AiChatPage());
+            },
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: Text(
+              textAlign: TextAlign.center,
+              "Ask for AI",
+              style: Theme.of(context).textTheme.bodyMedium,
+            )),
         appBar: AppBar(
           title: Text(widget.isNewNote ? "New Notes" : "Edit Note"),
           actions: [

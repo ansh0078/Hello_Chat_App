@@ -65,51 +65,51 @@ class LoginUserInfo extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Theme.of(context).colorScheme.background,
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            AssetsImage.profileCall,
-                            width: 18,
-                          ),
-                          const SizedBox(width: 10),
-                          const Text(
-                            "Call",
-                            style: TextStyle(
-                              color: Color(0xff039C00),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Theme.of(context).colorScheme.background,
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            AssetsImage.profileVideo,
-                            width: 20,
-                            color: const Color(0xffFF9900),
-                          ),
-                          const SizedBox(width: 10),
-                          const Text(
-                            "Video",
-                            style: TextStyle(
-                              color: Color(0xffFF9900),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   padding: const EdgeInsets.all(15),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(15),
+                    //     color: Theme.of(context).colorScheme.background,
+                    //   ),
+                    //   child: Row(
+                    //     children: [
+                    //       SvgPicture.asset(
+                    //         AssetsImage.profileCall,
+                    //         width: 18,
+                    //       ),
+                    //       const SizedBox(width: 10),
+                    //       const Text(
+                    //         "Call",
+                    //         style: TextStyle(
+                    //           color: Color(0xff039C00),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   padding: const EdgeInsets.all(15),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(15),
+                    //     color: Theme.of(context).colorScheme.background,
+                    //   ),
+                    //   child: Row(
+                    //     children: [
+                    //       SvgPicture.asset(
+                    //         AssetsImage.profileVideo,
+                    //         width: 20,
+                    //         color: const Color(0xffFF9900),
+                    //       ),
+                    //       const SizedBox(width: 10),
+                    //       const Text(
+                    //         "Video",
+                    //         style: TextStyle(
+                    //           color: Color(0xffFF9900),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(

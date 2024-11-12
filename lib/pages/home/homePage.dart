@@ -6,6 +6,7 @@ import 'package:hello/config/string.dart';
 import 'package:hello/controller/contactController.dart';
 import 'package:hello/controller/imagePicker.dart';
 import 'package:hello/controller/profileControler.dart';
+import 'package:hello/pages/aiChatPage.dart';
 import 'package:hello/pages/contactPage/contactPage.dart';
 import 'package:hello/pages/group/groupPage.dart';
 import 'package:hello/pages/home/widgets/chatList.dart';
@@ -47,6 +48,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           IconButton(
             onPressed: () {
               // appController.checkLatestVersion();
+              Get.to(AiChatPage());
             },
             icon: const Icon(
               Icons.search,
