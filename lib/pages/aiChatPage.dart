@@ -71,7 +71,8 @@ class _AiChatPageState extends State<AiChatPage> {
                                       const SizedBox(
                                         height: 12,
                                       ),
-                                      Text(
+                                      SelectableText(
+                                        showCursor: true,
                                         message[index].parts.first.text,
                                         style: const TextStyle(height: 1.2, fontSize: 18),
                                       ),

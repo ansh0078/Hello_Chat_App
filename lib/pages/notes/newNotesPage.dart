@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hello/config/string.dart';
 import 'package:hello/controller/newNoteController.dart';
 import 'package:hello/pages/aiChatPage.dart';
+import 'package:hello/pages/home/homePage.dart';
 import 'package:hello/pages/notes/widgets/dialogBox.dart';
 import 'package:hello/widgets/primaryBtn.dart';
 import 'package:provider/provider.dart';
@@ -150,7 +151,8 @@ class _NewNotesPageState extends State<NewNotesPage> {
                 onPressed: canSaveNote
                     ? () {
                         newNoteController.saveNote(context);
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
+                        Get.to(const HomePage());
                       }
                     : null,
                 icon: const Icon(Icons.save_alt_outlined),

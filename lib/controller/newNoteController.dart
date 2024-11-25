@@ -93,5 +93,7 @@ class NewNoteController extends ChangeNotifier {
     );
     final notesProvider = context.read<NotesProvider>();
     isNewNote ? notesProvider.addNote(note) : notesProvider.updateNote(note);
+    title = "";
+    tags.length = 0;
   }
 }
